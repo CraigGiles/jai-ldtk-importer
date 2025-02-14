@@ -1,0 +1,17 @@
+bin/
+run_tree/
+.build/
+backups/
+releases/
+*.ctm
+*.rdbg
+*.sln
+*.exp
+.idea/
+.vs/
+ctime/*.exe
+ctime/*.obj
+*.ebd
+*.ebs
+tags
+*.*~
