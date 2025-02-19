@@ -62,7 +62,7 @@ extract_layer_instances :: (object: *JSON_Object) -> [..] LayerInstance, grid_si
         l.grid_tiles = extract_layer_tiles(it, "gridTiles");
 
         l.iid = extract(it, "iid").str;
-        // l.int_grid_csv = parse_int_grid(it);
+        l.int_grid_csv = extract_int_grid_csv(it);
         l.layer_def_uid = cast(s32)extract(it, "layerDefUid").number;
         l.level_id = cast(s32)extract(it, "levelId").number;
         l.override_tileset_uid = extract_maybe(it, -1, "overrideTilesetUid");
@@ -78,6 +78,15 @@ extract_layer_instances :: (object: *JSON_Object) -> [..] LayerInstance, grid_si
 }
 
 #scope_file
+
+extract_int_grid_csv :: (object: *JSON_Object) -> [..]int {
+    ary := extract(object, "intGridCsv").array;
+    result: [..] int;
+    for ary {
+        array_add(*result, cast(int)it.number);
+    }
+    return result;
+}
 
 layer_type_as_enum :: (value: string) -> LayerType {
     result: LayerType = ---;
